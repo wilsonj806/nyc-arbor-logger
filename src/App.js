@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import d3Gen from './d3'
+import genHorzBar from './d3'
+
 function processJson(data) {
   const res = []
   const copy = Object.assign({}, data);
@@ -25,11 +26,9 @@ function App() {
 
   useEffect(() => {
     if (data.length > 0) {
-      d3Gen(data)
+      genHorzBar(data)
     }
   }, [data])
-  console.log(data)
-
 
   return (
     <div className="App">
