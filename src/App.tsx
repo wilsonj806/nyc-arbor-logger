@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import genHorzBar from './d3'
 
-function processJson(data) {
+function processJson(data: any) {
   const res = []
   const copy = Object.assign({}, data);
   for (const key in copy) {
@@ -11,7 +11,7 @@ function processJson(data) {
 }
 
 function App() {
-  const [data, setData] = useState([])
+  const [data, setData] = useState<any>([])
 
   useEffect(() => {
     const asyncFetch = async () => {
