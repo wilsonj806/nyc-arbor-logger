@@ -1,6 +1,6 @@
 import * as d3 from 'd3'
 
-const genHorzBar = (data) => {
+const genHorzBar = (xKey, yKey, idVal) => (data) => {
   const copy = [...data]
 
   const margin = {top: 20, right: 20, bottom: 30, left: 80},
@@ -17,7 +17,7 @@ const genHorzBar = (data) => {
   // append the svg object to the body of the page
   // append a 'group' element to 'svg'
   // moves the 'group' element to the top left margin
-  var svg = d3.select("#ctr-d3").append("svg")
+  var svg = d3.select(idVal).append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
@@ -25,8 +25,8 @@ const genHorzBar = (data) => {
         "translate(" + margin.left + "," + margin.top + ")");
 
   // Scale the range of the data in the domains
-  x.domain([0, d3.max(copy, function(d){ return d.count; })])
-  y.domain(copy.map(function(d) { return d.boro; }));
+  x.domain([0, d3.max(copy, function(d){ return d[xKey]; })])
+  y.domain(copy.map(function(d) { return d[yKey]; }));
   //y.domain([0, d3.max(data, function(d) { return d.sales; })]);
 
   // append the rectangles for the bar chart
@@ -35,8 +35,8 @@ const genHorzBar = (data) => {
     .enter().append("rect")
       .attr("class", "bar")
       //.attr("x", function(d) { return x(d.sales); })
-      .attr("width", function(d) {return x(d.count); } )
-      .attr("y", function(d) { return y(d.boro); })
+      .attr("width", function(d) {return x(d[xKey]); } )
+      .attr("y", function(d) { return y(d[yKey]); })
       .attr("height", y.bandwidth());
 
   // add the x Axis
