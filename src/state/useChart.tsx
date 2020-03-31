@@ -4,11 +4,13 @@ import genHorzBar from '../d3'
 const primaryEndpoint = process.env.NODE_ENV === 'production' ? 'https://nyc-tree-data-fetcher.herokuapp.com' : 'http://localhost:5000'
 
 
-function useChart(selector = '') {
-  if(!selector || selector === '') throw new Error('invalid selector, expecting a selector that complies with HTML standards')
-  const [endpointPrefix, setEndpointPrefix] = useState('');
+function useChart() {
+  const [endpointPrefix, setEndpointPrefix] = useState('')
+  const [selector, setSelector] = useState('')
   const [xKey, setXKey] = useState('')
   const [yKey, setYKey] = useState('')
+  // const [isLoading, setIsLoading] = useState(false)
+
   const [data, setData] = useState<any[]>([])
 
 
@@ -21,6 +23,7 @@ function useChart(selector = '') {
       setYKey(yKey);
       const res = await fetch(primaryEndpoint + endpointPrefix)
       const data = await res.json().then(json => processJson(xKey, yKey, json.data))
+      console.log('data fetched, now updating state')
       setData(data)
     }
 
@@ -30,12 +33,19 @@ function useChart(selector = '') {
 
   useEffect(() => {
     if (data.length > 0) {
+      console.log('this is data', data)
       genHorzBar(xKey, yKey, selector)(data)
     }
-  },[xKey,yKey,data])
+  },[xKey,yKey,data, selector])
 
+
+  const setEndpointPrefixWrap = (nextPrefix: string) => {
+    if (nextPrefix === endpointPrefix) return
+    setEndpointPrefix(nextPrefix)
+  }
   return {
-    setEndpointPrefix
+    setEndpointPrefixWrap,
+    setSelector
   }
 }
 

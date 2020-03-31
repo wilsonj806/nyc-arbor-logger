@@ -1,12 +1,16 @@
 import { FC, useEffect } from 'react'
 import useChart from '../state/useChart'
 
-const Chart: FC<any> = ({endpointPrefix, ...props}) => {
-  const { setEndpointPrefix } = useChart('#d3-stuff')
+const Chart: FC<any> = ({endpointPrefix, chartSelector, ...props}) => {
+  const { setEndpointPrefixWrap, setSelector } = useChart()
 
   useEffect(() => {
-    setEndpointPrefix(endpointPrefix)
-  }, [endpointPrefix, setEndpointPrefix])
+    setEndpointPrefixWrap(endpointPrefix)
+  }, [endpointPrefix, setEndpointPrefixWrap])
+
+  useEffect(() => {
+    setSelector(chartSelector)
+  }, [chartSelector, setSelector])
 
   return (
     null

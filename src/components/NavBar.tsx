@@ -1,4 +1,4 @@
-import React, { FC, useState, useContext, MouseEvent } from 'react'
+import React, { FC, useState, useContext, FormEvent } from 'react'
 import { ApiContext } from '../state/Context'
 
 interface navObj {
@@ -7,7 +7,7 @@ interface navObj {
 }
 
 interface NavProps {
-  graph_options : navObj[],
+  graph_options ?: navObj[],
   sub_options ?: string[],
   handleChange ?: any
 }
@@ -26,25 +26,32 @@ const NavBar: FC<NavProps> = (props = defaultProp) => {
 
   const [primaryValue, setPrimaryValue] = useState('')
 
-  const handleChange = (path: string) => (event: MouseEvent) => {
-    setPrimaryValue(path)
+  const handleChange = (event: FormEvent) => {
+    const target = event.target as any
+    setPrimaryValue(target.value)
   }
 
-  const handleSubmit = (event: MouseEvent) => {
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
     setEndpointPrefixWrap(primaryValue)
   }
 
-  const MappedOptions = graph_options.map((option, i: number) => {
+  const MappedOptions = graph_options ? graph_options.map((option, i: number) => {
     return (
-      <option onClick={handleChange(option.path)} key={i}>
+      <option value={option.path} key={i}>
+        { option.text }
+      </option>
+    )
+  }) : defaultProp!.graph_options!.map((option, i: number) => {
+    return (
+      <option value={option.path} key={i}>
         { option.text }
       </option>
     )
   })
   return (
     <nav>
-      <select>
+      <select onChange={handleChange}>
         { MappedOptions }
       </select>
       <button className='btn btn-primary' onClick={handleSubmit}>
