@@ -23,7 +23,6 @@ function useChart() {
       setYKey(yKey);
       const res = await fetch(primaryEndpoint + endpointPrefix)
       const data = await res.json().then(json => processJson(xKey, yKey, json.data))
-      console.log('data fetched, now updating state')
       setData(data)
     }
 
@@ -33,7 +32,11 @@ function useChart() {
 
   useEffect(() => {
     if (data.length > 0) {
-      console.log('this is data', data)
+      // check to make sure data isn't stale!
+      const keys = Object.keys(data[0])
+      const isStale = yKey !== keys[0] || xKey !== keys[1]
+      if (isStale) return
+
       genHorzBar(xKey, yKey, selector)(data)
     }
   },[xKey,yKey,data, selector])

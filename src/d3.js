@@ -1,18 +1,22 @@
 import * as d3 from 'd3'
 
+// TODO make it vertically pannable
 const genHorzBar = (xKey, yKey, idVal) => (data) => {
   const copy = [...data]
 
-  const margin = {top: 20, right: 20, bottom: 30, left: 80},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+  d3.select('svg').remove()
 
-    var y = d3.scaleBand()
+  const margin = {top: 20, right: 20, bottom: 30, left: 95}
+  const width = 960 - margin.left - margin.right
+  const mod = data.length > 10 ? data.length * 18: 500
+  const height = mod - margin.top - margin.bottom
+
+  const y = d3.scaleBand()
     .range([height, 0])
     .padding(0.1);
 
-  var x = d3.scaleLinear()
-      .range([0, width]);
+  const x = d3.scaleLinear()
+      .range([0, width])
 
   // append the svg object to the body of the page
   // append a 'group' element to 'svg'
@@ -30,14 +34,24 @@ const genHorzBar = (xKey, yKey, idVal) => (data) => {
   //y.domain([0, d3.max(data, function(d) { return d.sales; })]);
 
   // append the rectangles for the bar chart
-  svg.selectAll(".bar")
-    .data(copy)
-    .enter().append("rect")
+  const bar = svg.selectAll(".bar")
+    .data(copy, function(d) { return d })
+
+  bar.enter().append("rect")
+      // .attr('width', 0)
+      // .transition()
+    // .merge(bar)
       .attr("class", "bar")
+      // Add a transition so it doesn't do wonky shit???
       //.attr("x", function(d) { return x(d.sales); })
       .attr("width", function(d) {return x(d[xKey]); } )
       .attr("y", function(d) { return y(d[yKey]); })
       .attr("height", y.bandwidth());
+
+    bar.exit()
+      // .transition()
+        // .attr('height', 0)
+      .remove()
 
   // add the x Axis
   svg.append("g")
