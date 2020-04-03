@@ -17,6 +17,11 @@ declare namespace ArborLoggerTypes {
     sub_options ?: string[],
     handleChange ?: any
   }
+
+  interface ChartProps {
+    endpointPrefix: string
+    chartSelector: string
+  }
 }
 
 declare module 'ArborLoggerTypes' {
