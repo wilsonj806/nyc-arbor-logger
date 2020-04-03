@@ -1,11 +1,14 @@
-import { FC, useEffect } from 'react'
+import React, { FC, useEffect } from 'react'
+
+import Spinner from './Spinner'
+
 import useChart from '../state/useChart'
 
 import { ChartProps } from '../types'
 
 // TODO make Chart render a spinner if it's fetching
 const Chart: FC<ChartProps> = ({endpointPrefix, chartSelector }) => {
-  const { setEndpointPrefixWrap, setSelector } = useChart()
+  const { setEndpointPrefixWrap, setSelector, isLoading } = useChart()
 
   useEffect(() => {
     setEndpointPrefixWrap(endpointPrefix)
@@ -15,8 +18,11 @@ const Chart: FC<ChartProps> = ({endpointPrefix, chartSelector }) => {
     setSelector(chartSelector)
   }, [chartSelector, setSelector])
 
+  const ToRender = isLoading ? <Spinner/> : null
   return (
-    null
+    <>
+      { ToRender }
+    </>
   )
 }
 

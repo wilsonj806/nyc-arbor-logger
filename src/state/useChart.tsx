@@ -1,4 +1,6 @@
 import  { useEffect, useState } from 'react'
+import * as d3 from 'd3'
+
 import genHorzBar from '../d3'
 
 const primaryEndpoint = process.env.NODE_ENV === 'production' ? 'https://nyc-tree-data-fetcher.herokuapp.com' : 'http://localhost:5000'
@@ -9,7 +11,7 @@ function useChart() {
   const [selector, setSelector] = useState('')
   const [xKey, setXKey] = useState('')
   const [yKey, setYKey] = useState('')
-  // const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const [data, setData] = useState<any[]>([])
 
@@ -21,6 +23,7 @@ function useChart() {
       const { xKey, yKey } = checkEndpoint(endpointPrefix)
       setXKey(xKey);
       setYKey(yKey);
+      setIsLoading(i => true)
       const res = await fetch(primaryEndpoint + endpointPrefix)
       const data = await res.json().then(json => processJson(xKey, yKey, json.data))
       setData(data)
@@ -38,8 +41,15 @@ function useChart() {
       if (isStale) return
 
       genHorzBar(xKey, yKey, selector)(data)
+      setIsLoading(i => false)
     }
   },[xKey,yKey,data, selector])
+
+  useEffect(() => {
+    if (selector && selector !== '') {
+      toggleSvg(selector, isLoading)
+    }
+  },[selector, isLoading])
 
 
   const setEndpointPrefixWrap = (nextPrefix: string) => {
@@ -47,8 +57,9 @@ function useChart() {
     setEndpointPrefix(nextPrefix)
   }
   return {
+    isLoading,
+    setSelector,
     setEndpointPrefixWrap,
-    setSelector
   }
 }
 
@@ -76,6 +87,17 @@ function processJson(xKey:string , yKey:string, data: any) {
     res.push({ [yKey]: key, [xKey]: copy[key]})
   }
   return res
+}
+
+function toggleSvg(selector: string, shouldHide: boolean) {
+  if (shouldHide) {
+    d3.select(selector)
+    .select('svg')
+      .style('visibility', 'hidden')
+  } else {
+    d3.select(selector)
+    .style('visibility', 'visible')
+  }
 }
 
 export default useChart;

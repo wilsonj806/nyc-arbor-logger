@@ -19,8 +19,9 @@ function App() {
           display: 'flex',
           justifyContent: 'center',
           width: '100%'
-      }}/>
-      <Chart endpointPrefix={endpointPrefix} chartSelector='#d3-stuff'/>
+      }}>
+        <Chart endpointPrefix={endpointPrefix} chartSelector='#d3-stuff'/>
+      </div>
     </div>
   );
 }
