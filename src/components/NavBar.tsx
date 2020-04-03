@@ -1,27 +1,9 @@
 import React, { FC, useState, useContext, FormEvent } from 'react'
 import { ApiContext } from '../state/Context'
 
-interface navObj {
-  text : string
-  path : string
-}
+import { NavProps } from '../types'
 
-interface NavProps {
-  graph_options ?: navObj[],
-  sub_options ?: string[],
-  handleChange ?: any
-}
-
-const defaultProp: NavProps = {
-  graph_options: [
-    Object.assign({}, { text: 'Select an option', path: '' }),
-    Object.assign({}, { text: 'Qty Trees Per Borough', path: '/data/count' }),
-    Object.assign({},{ text: 'Qty of Each Tree Species', path: '/data/species' }),
-  ],
-}
-
-const NavBar: FC<NavProps> = (props = defaultProp) => {
-  const { graph_options } = props;
+const NavBar: FC<NavProps> = (props) => {
   const { setEndpointPrefixWrap } = useContext(ApiContext)
 
   const [primaryValue, setPrimaryValue] = useState('')
@@ -36,13 +18,7 @@ const NavBar: FC<NavProps> = (props = defaultProp) => {
     setEndpointPrefixWrap(primaryValue)
   }
 
-  const MappedOptions = graph_options ? graph_options.map((option, i: number) => {
-    return (
-      <option value={option.path} key={i}>
-        { option.text }
-      </option>
-    )
-  }) : defaultProp!.graph_options!.map((option, i: number) => {
+  const MappedOptions = props.graph_options!.map((option, i: number) => {
     return (
       <option value={option.path} key={i}>
         { option.text }
@@ -59,6 +35,14 @@ const NavBar: FC<NavProps> = (props = defaultProp) => {
       </button>
     </nav>
   )
+}
+
+NavBar.defaultProps = {
+  graph_options: [
+    Object.assign({}, { text: 'Select an option', path: '' }),
+    Object.assign({}, { text: 'Qty Trees Per Borough', path: '/data/count' }),
+    Object.assign({},{ text: 'Qty of Each Tree Species', path: '/data/species' }),
+  ],
 }
 
 export default NavBar

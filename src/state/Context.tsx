@@ -1,11 +1,6 @@
 import React, { createContext, FC, useState } from 'react'
 
-
-interface ContextVals {
-  endpointPrefix: string
-  setEndpointPrefixWrap: (endpoint: string) => void
-  [key: string] : any
-}
+import { ContextVals } from '../types'
 
 const ApiContext = createContext<ContextVals>({
   endpointPrefix: '',
@@ -13,7 +8,7 @@ const ApiContext = createContext<ContextVals>({
 });
 
 
-const Provider: FC<any> = ({children}) => {
+const Provider: FC = ({children}) => {
   const [endpointPrefix, setEndpointPrefix] = useState('');
   const setEndpointPrefixWrap = (endpoint: string) => setEndpointPrefix(endpoint)
 

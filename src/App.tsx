@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { ApiContext } from './state/Context'
 
 import NavBar from './components/NavBar'
