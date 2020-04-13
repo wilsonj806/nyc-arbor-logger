@@ -18,18 +18,18 @@ function useChart() {
 
   useEffect(() => {
     if (endpointPrefix === '') return
-    const asyncFn = async () => {
+    const { xKey, yKey } = checkEndpoint(endpointPrefix)
+    setXKey(xKey);
+    setYKey(yKey);
+    setIsLoading(i => true)
+    const asyncFn: () => void = async () => {
       // Generate D3 keys
-      const { xKey, yKey } = checkEndpoint(endpointPrefix)
-      setXKey(xKey);
-      setYKey(yKey);
-      setIsLoading(i => true)
       const res = await fetch(primaryEndpoint + endpointPrefix)
       const data = await res.json().then(json => processJson(xKey, yKey, json.data))
       setData(data)
     }
 
-    asyncFn();
+    debounce(asyncFn, 500)();
 
   }, [endpointPrefix])
 
@@ -106,6 +106,18 @@ function toggleSvg(selector: string, shouldHide: boolean) {
   } else {
     d3.select(selector + 'svg')
       .attr('visibility', 'visible')
+  }
+}
+
+function debounce(fn: () => Promise<void>|void, time: number) {
+  let timer: any;
+
+  return function(this: any) {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      // eslint-disable-next-line
+      fn()
+    }, time)
   }
 }
 
