@@ -75,6 +75,15 @@ function checkEndpoint(endpointPrefix = '') {
         xKey: 'count',
         yKey: 'species'
       }
+    case '/data/brooklyn/species':
+    case '/data/bronx/species':
+    case '/data/queens/species':
+    case '/data/manhattan/species':
+    case '/data/staten%32island/species':
+      return {
+        xKey: 'count',
+        yKey: 'species'
+      }
     default:
       throw new Error('Expecting a valid endpoint')
   }
