@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>This is a test for D3</h1>
+        <h1>NYC Arbor Logger</h1>
       </header>
       <NavBar/>
       <div
