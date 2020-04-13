@@ -1,6 +1,8 @@
 import React, { FC, useState, useContext, FormEvent } from 'react'
 import { ApiContext } from '../state/Context'
 
+import './nav.css'
+
 import { NavProps } from '../types'
 
 
@@ -47,25 +49,33 @@ const NavBar: FC<NavProps> = (props) => {
   })
 
   const SecondaryOptions = shouldRenderSecondary ? (
-    <select onChange={handleChange} data-secondary={true}>
-      { SecondaryArr.map((row, i) => (
-      <option value={row.path} key={i}>
-        { row.text }
-      </option>
-      )) }
-    </select>
+    <label>
+      <span>Choose a Borough:</span>
+      <select className="select--primary" onChange={handleChange} data-secondary={true}>
+        { SecondaryArr.map((row, i) => (
+        <option value={row.path} key={i}>
+          { row.text }
+        </option>
+        )) }
+      </select>
+    </label>
   ) : null
 
   return (
-    <nav>
-      <select onChange={handleChange}>
-        { MappedOptions }
-      </select>
-      { SecondaryOptions }
-      <button className='btn btn-primary' onClick={handleSubmit}>
-        Go
-      </button>
-    </nav>
+    <div className='ctr-nav'>
+      <nav>
+        <label>
+          Choose an option:
+          <select className="select--primary" onChange={handleChange}>
+            { MappedOptions }
+          </select>
+        </label>
+        { SecondaryOptions }
+        <button className='btn btn-primary' onClick={handleSubmit}>
+          Go
+        </button>
+      </nav>
+    </div>
   )
 }
 
