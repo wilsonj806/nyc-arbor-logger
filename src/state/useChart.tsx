@@ -90,13 +90,13 @@ function processJson(xKey:string , yKey:string, data: any) {
 }
 
 function toggleSvg(selector: string, shouldHide: boolean) {
+  console.log('toggling out')
   if (shouldHide) {
-    d3.select(selector)
-    .select('svg')
-      .style('visibility', 'hidden')
+    d3.select(selector + ' svg')
+      .style('display', 'none')
   } else {
-    d3.select(selector)
-    .style('visibility', 'visible')
+    d3.select(selector + 'svg')
+      .attr('visibility', 'visible')
   }
 }
 
