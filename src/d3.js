@@ -4,12 +4,15 @@ import * as d3 from 'd3'
 const genHorzBar = (xKey, yKey, idVal) => (data) => {
   const copy = [...data]
 
-  d3.select('svg').remove()
+  d3.select('svg')
+    .attr('width', '0')
+    .remove()
 
-  const margin = {top: 20, right: 20, bottom: 30, left: 95}
+  const margin = {top: 20, right: 110, bottom: 30, left: 110 }
   const width = 960 - margin.left - margin.right
   const mod = data.length > 10 ? data.length * 18: 500
-  const height = mod - margin.top - margin.bottom
+  // const height = mod - margin.top - margin.bottom
+  const height = 500 - margin.top - margin.bottom
 
   const y = d3.scaleBand()
     .range([height, 0])
@@ -37,11 +40,13 @@ const genHorzBar = (xKey, yKey, idVal) => (data) => {
   const bar = svg.selectAll(".bar")
     .data(copy, function(d) { return d })
 
+  const colors = d3.scaleOrdinal(d3.schemeCategory10);
   bar.enter().append("rect")
       // .attr('width', 0)
       // .transition()
     // .merge(bar)
       .attr("class", "bar")
+      .attr('fill', function(d, i) { return colors(i) })
       // Add a transition so it doesn't do wonky shit???
       //.attr("x", function(d) { return x(d.sales); })
       .attr("width", function(d) {return x(d[xKey]); } )
