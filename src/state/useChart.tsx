@@ -79,7 +79,7 @@ function checkEndpoint(endpointPrefix = '') {
     case '/data/bronx/species':
     case '/data/queens/species':
     case '/data/manhattan/species':
-    case '/data/staten%32island/species':
+    case '/data/staten%20island/species':
       return {
         xKey: 'count',
         yKey: 'species'
