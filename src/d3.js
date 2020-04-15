@@ -10,7 +10,7 @@ const genHorzBar = (xKey, yKey, idVal) => (data) => {
 
   const margin = {top: 20, right: 110, bottom: 30, left: 110 }
   const width = 960 - margin.left - margin.right
-  const mod = data.length > 10 ? data.length * 18: 500
+  // const mod = data.length > 10 ? data.length * 18: 500
   // const height = mod - margin.top - margin.bottom
   const height = 500 - margin.top - margin.bottom
 
