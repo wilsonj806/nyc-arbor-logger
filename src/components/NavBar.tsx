@@ -12,7 +12,7 @@ const SecondaryArr = [
   { text: 'Brooklyn', path: '/data/brooklyn/species' },
   { text: 'Manhattan', path: '/data/manhattan/species' },
   { text: 'Queens', path: '/data/manhattan/species' },
-  { text: 'Staten Island', path: '/data/staten%32island/species' },
+  { text: 'Staten Island', path: '/data/staten%20island/species' },
 ]
 
 const NavBar: FC<NavProps> = (props) => {
