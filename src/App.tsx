@@ -10,17 +10,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>This is a test for D3</h1>
+        <h1>NYC Arbor Logger</h1>
       </header>
       <NavBar/>
       <div
         id='d3-stuff'
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          width: '100%'
-      }}/>
-      <Chart endpointPrefix={endpointPrefix} chartSelector='#d3-stuff'/>
+      >
+        <Chart endpointPrefix={endpointPrefix} chartSelector='#d3-stuff'/>
+      </div>
     </div>
   );
 }

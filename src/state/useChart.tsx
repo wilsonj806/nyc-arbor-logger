@@ -1,4 +1,6 @@
 import  { useEffect, useState } from 'react'
+import * as d3 from 'd3'
+
 import genHorzBar from '../d3'
 
 const primaryEndpoint = process.env.NODE_ENV === 'production' ? 'https://nyc-tree-data-fetcher.herokuapp.com' : 'http://localhost:5000'
@@ -9,24 +11,25 @@ function useChart() {
   const [selector, setSelector] = useState('')
   const [xKey, setXKey] = useState('')
   const [yKey, setYKey] = useState('')
-  // const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const [data, setData] = useState<any[]>([])
 
 
   useEffect(() => {
     if (endpointPrefix === '') return
-    const asyncFn = async () => {
+    const { xKey, yKey } = checkEndpoint(endpointPrefix)
+    setXKey(xKey);
+    setYKey(yKey);
+    setIsLoading(i => true)
+    const asyncFn: () => void = async () => {
       // Generate D3 keys
-      const { xKey, yKey } = checkEndpoint(endpointPrefix)
-      setXKey(xKey);
-      setYKey(yKey);
       const res = await fetch(primaryEndpoint + endpointPrefix)
       const data = await res.json().then(json => processJson(xKey, yKey, json.data))
       setData(data)
     }
 
-    asyncFn();
+    debounce(asyncFn, 500)();
 
   }, [endpointPrefix])
 
@@ -38,8 +41,15 @@ function useChart() {
       if (isStale) return
 
       genHorzBar(xKey, yKey, selector)(data)
+      setIsLoading(i => false)
     }
   },[xKey,yKey,data, selector])
+
+  useEffect(() => {
+    if (selector && selector !== '') {
+      toggleSvg(selector, isLoading)
+    }
+  },[selector, isLoading])
 
 
   const setEndpointPrefixWrap = (nextPrefix: string) => {
@@ -47,8 +57,9 @@ function useChart() {
     setEndpointPrefix(nextPrefix)
   }
   return {
+    isLoading,
+    setSelector,
     setEndpointPrefixWrap,
-    setSelector
   }
 }
 
@@ -60,6 +71,15 @@ function checkEndpoint(endpointPrefix = '') {
         yKey: 'boro'
       }
     case '/data/species':
+      return {
+        xKey: 'count',
+        yKey: 'species'
+      }
+    case '/data/brooklyn/species':
+    case '/data/bronx/species':
+    case '/data/queens/species':
+    case '/data/manhattan/species':
+    case '/data/staten%32island/species':
       return {
         xKey: 'count',
         yKey: 'species'
@@ -76,6 +96,29 @@ function processJson(xKey:string , yKey:string, data: any) {
     res.push({ [yKey]: key, [xKey]: copy[key]})
   }
   return res
+}
+
+function toggleSvg(selector: string, shouldHide: boolean) {
+  console.log('toggling out')
+  if (shouldHide) {
+    d3.select(selector + ' svg')
+      .style('display', 'none')
+  } else {
+    d3.select(selector + 'svg')
+      .attr('visibility', 'visible')
+  }
+}
+
+function debounce(fn: () => Promise<void>|void, time: number) {
+  let timer: any;
+
+  return function(this: any) {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      // eslint-disable-next-line
+      fn()
+    }, time)
+  }
 }
 
 export default useChart;

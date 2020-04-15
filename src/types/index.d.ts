@@ -10,6 +10,7 @@ declare namespace ArborLoggerTypes {
   interface navObj {
     text : string
     path : string
+    isSecondary ?: string
   }
 
   interface NavProps {
