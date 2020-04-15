@@ -1,0 +1,21 @@
+# Configure Node.jS environment
+language: node_js
+node_js:
+  - "stable"
+install:
+  - npm ci
+cache: npm
+branches:
+  only:
+    - master
+jobs:
+  include:
+    - stage: "Deploy to Github Pages"
+      script: npm run build
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: build
+  on:
+    branch: master
