@@ -64,16 +64,18 @@ const NavBar: FC<NavProps> = (props) => {
   return (
     <div className='ctr-nav'>
       <nav>
-        <label>
-          Choose an option:
-          <select className="select--primary" onChange={handleChange}>
-            { MappedOptions }
-          </select>
-        </label>
-        { SecondaryOptions }
-        <button className='btn btn-primary' onClick={handleSubmit}>
-          Go
-        </button>
+        <form>
+          <label className='label--select'>
+            Choose an option:
+            <select className="select--primary" onChange={handleChange}>
+              { MappedOptions }
+            </select>
+          </label>
+          { SecondaryOptions }
+          <button className='btn btn-primary' onClick={handleSubmit}>
+            Go
+          </button>
+      </form>
       </nav>
     </div>
   )
