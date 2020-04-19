@@ -49,7 +49,7 @@ const NavBar: FC<NavProps> = (props) => {
   })
 
   const SecondaryOptions = shouldRenderSecondary ? (
-    <label>
+    <label  className='label--select'>
       <span>Choose a Borough:</span>
       <select className="select--primary" onChange={handleChange} data-secondary={true}>
         { SecondaryArr.map((row, i) => (
