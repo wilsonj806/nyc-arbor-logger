@@ -2,7 +2,7 @@
   position: absolute;
   background: white;
   top: 12vh;
-  left: 25%;
+  left: calc((100% - 60%) * 0.5);
   width: 60%;
   height: 55vh;
   z-index: 10;
