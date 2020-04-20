@@ -8,11 +8,11 @@ const genHorzBar = (xKey, yKey, idVal) => (data) => {
     .attr('width', '0')
     .remove()
 
-  const margin = {top: 20, right: 110, bottom: 30, left: 110 }
+  const margin = {top: 20, right: 110, bottom: 80, left: 150 }
   const width = 960 - margin.left - margin.right
-  // const mod = data.length > 10 ? data.length * 18: 500
-  // const height = mod - margin.top - margin.bottom
-  const height = 500 - margin.top - margin.bottom
+  const mod = data.length > 10 ? data.length * 18: 500
+  const height = mod - margin.top - margin.bottom
+  // const height = 700 - margin.top - margin.bottom
 
   const y = d3.scaleBand()
     .range([height, 0])
@@ -63,8 +63,28 @@ const genHorzBar = (xKey, yKey, idVal) => (data) => {
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
 
+  // add text label for the x
+  svg.append("text")
+  .attr("transform",
+        "translate(" + (width/2) + " ," +
+                       (height + margin.top + 20) + ")")
+  .style("text-anchor", "middle")
+  .text(capitalizeFirstLetter(xKey));
+
   // add the y Axis
   svg.append("g")
     .call(d3.axisLeft(y));
+
+  svg.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("y", 0 - margin.left * 0.85)
+    .attr("x",0 - (height / 2))
+    .attr("dy", "1em")
+    .style("text-anchor", "middle")
+    .text(capitalizeFirstLetter(yKey));
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1)
 }
 export default genHorzBar
