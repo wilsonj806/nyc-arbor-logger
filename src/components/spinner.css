@@ -1,36 +1,3 @@
-/* @keyframes spinner {
-  0% {
-      transform: translate3d(-50%, -50%, 0) rotate(0deg);
-  }
-  100% {
-       transform: translate3d(-50%, -50%, 0) rotate(360deg);
-  }
-}
-
-.spinner {
-  height: 100%;
-  width: 100%;
-  opacity: 1;
-  transition: opacity linear 0.1s;
-  position: relative;
-}
-
-.spinner::before {
-  content: '';
-  top: 50%;
-  left: 50%;
-  position: absolute;
-  border: solid 3px #eee;
-  border-bottom-color: #ef6565;
-  border-radius: 50%;
-  height: 40px;
-  width: 40px;
-  transform: translate3d(-50%, -50%, 0);
-  transform-origin: center;
-  will-change: transform;
-  opacity: inherit;
-  animation: 2s linear infinite spinner;
-} */
 .spinner {
   font-size: 10px;
   margin: 50px auto;
@@ -38,12 +5,12 @@
   width: 11em;
   height: 11em;
   border-radius: 50%;
-  background: #e1801a;
-  background: -moz-linear-gradient(left, #e1801a 10%, rgba(166,99,26, 0) 42%);
-  background: -webkit-linear-gradient(left, #e1801a 10%, rgba(166,99,26, 0) 42%);
-  background: -o-linear-gradient(left, #e1801a 10%, rgba(166,99,26, 0) 42%);
-  background: -ms-linear-gradient(left, #e1801a 10%, rgba(166,99,26, 0) 42%);
-  background: linear-gradient(to right, #e1801a 10%, rgba(166,99,26, 0) 42%);
+  background: #981ae1;
+  background: -moz-linear-gradient(left, #981ae1 10%, rgba(166,99,26, 0) 42%);
+  background: -webkit-linear-gradient(left, #981ae1 10%, rgba(166,99,26, 0) 42%);
+  background: -o-linear-gradient(left, #981ae1 10%, rgba(166,99,26, 0) 42%);
+  background: -ms-linear-gradient(left, #981ae1 10%, rgba(166,99,26, 0) 42%);
+  background: linear-gradient(to right, #981ae1 10%, rgba(166,99,26, 0) 42%);
   position: relative;
   -webkit-animation: load3 1.4s infinite linear;
   animation: load3 1.4s infinite linear;
@@ -54,7 +21,7 @@
 .spinner:before {
   width: 50%;
   height: 50%;
-  background: #e1801a;
+  background: #981ae1;
   border-radius: 100% 0 0 0;
   position: absolute;
   top: 0;
