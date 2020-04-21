@@ -23,6 +23,11 @@ declare namespace ArborLoggerTypes {
     endpointPrefix: string
     chartSelector: string
   }
+
+  interface ModalProps {
+    shouldDisplay: boolean
+  }
+  
 }
 
 declare module 'ArborLoggerTypes' {

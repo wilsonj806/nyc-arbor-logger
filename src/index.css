@@ -7,7 +7,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   box-sizing: border-box;
-  background: #6ab94f
+  background: #81ca68;
+  position: relative;
 }
 
 .App {
@@ -18,9 +19,20 @@ body {
   flex-flow: column nowrap;
   place-items: center center;
 }
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.fab {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  border-radius: 50%;
+  background: rgb(155, 32, 155);
+  box-shadow: 4px 4px 8px rgba(27, 27, 27, 0.5);
+  border: 0;
+  color: white;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  /* padding: 8px 12px; */
 }
 
 
@@ -41,4 +53,10 @@ svg {
   /* place-items: center; */
   margin: auto;
   background: rgb(250, 250, 250);
+}
+
+#portal {
+  position: absolute;
+  width: 100vw;
+  z-index: 0;
 }

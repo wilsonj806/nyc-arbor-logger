@@ -1,0 +1,29 @@
+.modal {
+  position: absolute;
+  background: white;
+  top: 12vh;
+  left: calc((100% - 60%) * 0.5);
+  width: 60%;
+  height: 55vh;
+  z-index: 10;
+  box-shadow: 4px 4px 24px 24px rgba(92, 92, 92, 0.25);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.modal-header {
+  width: 100%;
+  background: rgb(184, 102, 26);
+  color: white;
+  box-shadow: 0px 2px 4px rgba(92, 92, 92, 0.25);
+}
+
+.modal-header > h1 {
+  padding: 0 16px;
+}
+
+.modal-body {
+  padding: 0 16px;
+}
