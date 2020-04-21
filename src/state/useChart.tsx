@@ -1,7 +1,7 @@
 import  { useEffect, useState } from 'react'
 import * as d3 from 'd3'
 
-import genHorzBar from '../d3'
+import genHorzBar from './genBarChart'
 
 const primaryEndpoint = process.env.NODE_ENV === 'production' ? 'https://nyc-tree-data-fetcher.herokuapp.com' : 'http://localhost:5000'
 
