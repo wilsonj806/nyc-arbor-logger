@@ -1,5 +1,4 @@
-import React, { useContext, useState, SyntheticEvent } from 'react';
-import { ApiContext } from './state/Context'
+import React, { useState, SyntheticEvent } from 'react';
 
 import NavBar from './components/NavBar'
 import Chart from './components/Chart'
@@ -8,8 +7,6 @@ import Modal from './components/Modal'
 
 function App() {
   const [shouldDisplay, setShouldDisplay] = useState(false)
-
-  const { endpointPrefix } = useContext(ApiContext)
 
 
   const handleClick = (event: SyntheticEvent) => {
@@ -31,7 +28,7 @@ function App() {
         <div
           id='d3-stuff'
         >
-          <Chart endpointPrefix={endpointPrefix} chartSelector='#d3-stuff'/>
+          <Chart chartSelector='#d3-stuff'/>
         </div>
         <button className='fab' id='fab--info' onClick={() => setShouldDisplay(!shouldDisplay) }>
           ?

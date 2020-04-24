@@ -1,65 +1,62 @@
-import  { useEffect, useState } from 'react'
+import  { useEffect, useState, useContext } from 'react'
 import * as d3 from 'd3'
+
+import { ApiContext } from './Context'
 
 import genHorzBar from './genBarChart'
 
-const primaryEndpoint = process.env.NODE_ENV === 'production' ? 'https://nyc-tree-data-fetcher.herokuapp.com' : 'http://localhost:5000'
+const baseEndpoint = process.env.NODE_ENV === 'production' ? 'https://nyc-tree-data-fetcher.herokuapp.com' : 'http://localhost:5000'
 
 
-function useChart() {
-  const [endpointPrefix, setEndpointPrefix] = useState('')
-  const [selector, setSelector] = useState('')
+function useChart(selector: string) {
+  // Declaring Context as required state to sync with
+  const { state } = useContext(ApiContext)
+
   const [xKey, setXKey] = useState('')
   const [yKey, setYKey] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
   const [data, setData] = useState<any[]>([])
 
+  const { endpoint } = state
 
+  // Performing fetch side effect
   useEffect(() => {
-    if (endpointPrefix === '') return
-    const { xKey, yKey } = checkEndpoint(endpointPrefix)
-    setXKey(xKey);
-    setYKey(yKey);
-    setIsLoading(i => true)
-    const asyncFn: () => void = async () => {
-      // Generate D3 keys
-      const res = await fetch(primaryEndpoint + endpointPrefix)
-      const data = await res.json().then(json => processJson(xKey, yKey, json.data))
-      setData(data)
+    const asyncFetch = async () => {
+      if (endpoint === '') return
+      setIsLoading(i => true)
+      const { xKey, yKey } = checkEndpoint(endpoint)
+      try {
+        const res = await fetch(baseEndpoint + endpoint)
+        const data = await res.json().then(json => processJson(xKey, yKey, json.data))
+        // synchronizing local state with Context state
+        setData(data)
+        setXKey(xKey)
+        setYKey(yKey)
+      } catch (err) {
+        // TODO make Context sync with Errors
+        console.error(err)
+      }
     }
+    debounce(asyncFetch, 200)();
+  }, [endpoint])
 
-    debounce(asyncFn, 500)();
-
-  }, [endpointPrefix])
-
+  // Performing D3 DOM modification side effect
   useEffect(() => {
-    if (data.length > 0) {
-      // check to make sure data isn't stale!
-      const keys = Object.keys(data[0])
-      const isStale = yKey !== keys[0] || xKey !== keys[1]
-      if (isStale) return
+    if (data.length === 0) return
+    genHorzBar(xKey, yKey, selector)(data)
+    setIsLoading(i => false)
+  }, [data, xKey, yKey, selector])
 
-      genHorzBar(xKey, yKey, selector)(data)
-      setIsLoading(i => false)
-    }
-  },[xKey,yKey,data, selector])
-
+  // Performing D3 DOM modification side effect
   useEffect(() => {
     if (selector && selector !== '') {
       toggleSvg(selector, isLoading)
     }
   },[selector, isLoading])
 
-
-  const setEndpointPrefixWrap = (nextPrefix: string) => {
-    if (nextPrefix === endpointPrefix) return
-    setEndpointPrefix(nextPrefix)
-  }
   return {
     isLoading,
-    setSelector,
-    setEndpointPrefixWrap,
   }
 }
 
@@ -99,7 +96,6 @@ function processJson(xKey:string , yKey:string, data: any) {
 }
 
 function toggleSvg(selector: string, shouldHide: boolean) {
-  console.log('toggling out')
   if (shouldHide) {
     d3.select(selector + ' svg')
       .style('display', 'none')

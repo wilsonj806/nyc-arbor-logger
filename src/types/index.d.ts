@@ -7,9 +7,7 @@ declare namespace ArborLoggerTypes {
   }
   interface ContextVals {
     state: GlobalState
-    endpointPrefix: string
     updateEndpointFn: (str: string) => void
-    setEndpointPrefixWrap: (endpoint: string) => void
   }
 
   interface navObj {
@@ -25,14 +23,13 @@ declare namespace ArborLoggerTypes {
   }
 
   interface ChartProps {
-    endpointPrefix: string
     chartSelector: string
   }
 
   interface ModalProps {
     shouldDisplay: boolean
   }
-  
+
 }
 
 declare module 'ArborLoggerTypes' {
