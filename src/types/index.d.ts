@@ -2,8 +2,13 @@
 
 
 declare namespace ArborLoggerTypes {
+  interface GlobalState {
+    endpoint: string
+  }
   interface ContextVals {
+    state: GlobalState
     endpointPrefix: string
+    updateEndpointFn: (str: string) => void
     setEndpointPrefixWrap: (endpoint: string) => void
   }
 
