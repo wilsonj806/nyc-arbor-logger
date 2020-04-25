@@ -9,8 +9,10 @@
     "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "mock-server:dev": "json-server -p 5000 ./server/data.json --routes ./server/routes.json",
-    "mock-server:stagin": "json-server -q -p 5000 ./server/data.json --routes ./server/routes.json"
+    "cypress:open": "cypress open",
+    "cypress":"cypress run",
+    "e2e": "npm run mock-server & start-server-and-test start http://localhost:3000 cypress",
+    "mock-server": "json-server --quiet -p 5000 ./server/data.json --routes ./server/routes.json"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -46,6 +48,7 @@
   },
   "devDependencies": {
     "cypress": "^4.4.1",
-    "json-server": "^0.16.1"
+    "json-server": "^0.16.1",
+    "start-server-and-test": "^1.11.0"
   }
 }
