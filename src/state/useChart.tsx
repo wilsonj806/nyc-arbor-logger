@@ -10,7 +10,7 @@ const baseEndpoint = process.env.NODE_ENV === 'production' ? 'https://nyc-tree-d
 
 function useChart(selector: string) {
   // Declaring Context as required state to sync with
-  const { state } = useContext(ApiContext)
+  const { state, updateMessageFn } = useContext(ApiContext)
 
   const [xKey, setXKey] = useState('')
   const [yKey, setYKey] = useState('')
@@ -18,16 +18,24 @@ function useChart(selector: string) {
 
   const [data, setData] = useState<any[]>([])
 
-  const { endpoint } = state
+  const { endpoint, message } = state
 
   // Performing fetch side effect
   useEffect(() => {
-    if (endpoint === '') return
-    setIsLoading(i => true)
+    if (endpoint === '' || message !== '') return
+    setIsLoading(true)
     const asyncFetch = async () => {
       const { xKey, yKey } = checkEndpoint(endpoint)
       try {
         const res = await fetch(baseEndpoint + endpoint)
+
+        if (Math.floor(res.status / 100) >= 4) {
+          const str = await res.text()
+          if (str[0] === '{') {
+            throw new Error(res.statusText)
+          }
+          throw new Error(str)
+        }
         const data = await res.json().then(json => processJson(xKey, yKey, json.data))
         // synchronizing local state with Context state
         setData(data)
@@ -35,11 +43,12 @@ function useChart(selector: string) {
         setYKey(yKey)
       } catch (err) {
         // TODO make Context sync with Errors
-        console.error(err)
+        updateMessageFn(err.message)
+        setIsLoading(false)
       }
     }
     debounce(asyncFetch, 1000)();
-  }, [endpoint])
+  }, [endpoint, updateMessageFn, message])
 
   // Performing D3 DOM modification side effect
   useEffect(() => {

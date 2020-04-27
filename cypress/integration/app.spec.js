@@ -90,6 +90,20 @@ describe('Tests for application navigation', () => {
   cy.contains('Loading...')
   })
 
+  it('displays an error message if a request failed', () => {
+    cy.get('body')
+      .find('nav')
+      .find('form[data-nav]')
+      .find('select')
+      .select('Qty of Each Tree Species')
+
+    cy.get('nav > form[data-nav]')
+      .contains('Go')
+      .click()
+
+    cy.get('[role=alert]')
+  })
+
   it('displays a modal on click of a button and closes it on click', () => {
     cy.contains('?')
       .click()

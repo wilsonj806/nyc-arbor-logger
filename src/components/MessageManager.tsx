@@ -3,6 +3,7 @@ import { ApiContext } from '../state/Context'
 
 import './message.css'
 
+// TODO add message closing
 const MessageManager = () => {
   const { state } = useContext(ApiContext)
   const { message } = state;
