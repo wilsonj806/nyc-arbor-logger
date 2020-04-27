@@ -3,6 +3,7 @@ import React, { useState, SyntheticEvent } from 'react';
 import NavBar from './components/NavBar'
 import Chart from './components/Chart'
 import Modal from './components/Modal'
+import MessageManager from './components/MessageManager';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <header className="App-header">
           <h1>NYC Arbor Logger</h1>
         </header>
+        <MessageManager />
         <NavBar/>
         <div
           id='d3-stuff'

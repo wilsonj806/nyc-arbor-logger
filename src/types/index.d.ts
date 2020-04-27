@@ -4,10 +4,12 @@
 declare namespace ArborLoggerTypes {
   interface GlobalState {
     endpoint: string
+    message: string
   }
   interface ContextVals {
     state: GlobalState
     updateEndpointFn: (str: string) => void
+    updateMessageFn: (str: string) => void
   }
 
   interface navObj {
