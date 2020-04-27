@@ -66,6 +66,30 @@ describe('Tests for application navigation', () => {
       .should('have.length', data.length)
   })
 
+  it('displays a loading message while fetching data', () => {
+    cy.get('body')
+    .find('nav')
+    .find('form[data-nav]')
+    .find('select')
+    .select('Qty Trees Per Borough')
+
+  cy.get('nav')
+  .find('form[data-nav]')
+  .find('select')
+  .select('Qty of Each Tree Species in a Borough')
+
+  cy.get('nav')
+  .find('form[data-nav]')
+  .find('select[data-secondary]')
+  .select('Staten Island')
+
+  cy.get('nav > form[data-nav]')
+    .contains('Go')
+    .click()
+
+  cy.contains('Loading...')
+  })
+
   it('displays a modal on click of a button and closes it on click', () => {
     cy.contains('?')
       .click()

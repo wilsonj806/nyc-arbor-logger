@@ -22,9 +22,9 @@ function useChart(selector: string) {
 
   // Performing fetch side effect
   useEffect(() => {
+    if (endpoint === '') return
+    setIsLoading(i => true)
     const asyncFetch = async () => {
-      if (endpoint === '') return
-      setIsLoading(i => true)
       const { xKey, yKey } = checkEndpoint(endpoint)
       try {
         const res = await fetch(baseEndpoint + endpoint)
@@ -38,7 +38,7 @@ function useChart(selector: string) {
         console.error(err)
       }
     }
-    debounce(asyncFetch, 200)();
+    debounce(asyncFetch, 1000)();
   }, [endpoint])
 
   // Performing D3 DOM modification side effect

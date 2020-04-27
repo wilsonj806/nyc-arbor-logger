@@ -1,16 +1,21 @@
+.wrap-spinner {
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column nowrap;
+  background: rgb(250, 250, 250);
+  box-shadow: 2px 2px 4px rgba(44, 44, 44, 0.25);
+}
+
 .spinner {
   font-size: 10px;
   margin: 50px auto;
   text-indent: -9999em;
-  width: 11em;
-  height: 11em;
+  width: 12em;
+  height: 12em;
   border-radius: 50%;
-  background: #981ae1;
-  background: -moz-linear-gradient(left, #981ae1 10%, rgba(166,99,26, 0) 42%);
-  background: -webkit-linear-gradient(left, #981ae1 10%, rgba(166,99,26, 0) 42%);
-  background: -o-linear-gradient(left, #981ae1 10%, rgba(166,99,26, 0) 42%);
-  background: -ms-linear-gradient(left, #981ae1 10%, rgba(166,99,26, 0) 42%);
-  background: linear-gradient(to right, #981ae1 10%, rgba(166,99,26, 0) 42%);
   position: relative;
   -webkit-animation: load3 1.4s infinite linear;
   animation: load3 1.4s infinite linear;
@@ -21,7 +26,7 @@
 .spinner:before {
   width: 50%;
   height: 50%;
-  background: #981ae1;
+  background: #ffc875;
   border-radius: 100% 0 0 0;
   position: absolute;
   top: 0;
@@ -29,7 +34,7 @@
   content: '';
 }
 .spinner:after {
-  background: #81ca68;
+  background: white;
   width: 75%;
   height: 75%;
   border-radius: 50%;
