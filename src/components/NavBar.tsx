@@ -63,7 +63,7 @@ const NavBar: FC<NavProps> = (props) => {
   return (
     <div className='ctr-nav'>
       <nav>
-        <form>
+        <form data-nav='navigation-form'>
           <label className='label--select'>
             Choose an option:
             <select className="select--primary" onChange={handleChange}>
