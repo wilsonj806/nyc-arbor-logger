@@ -47,7 +47,7 @@ function useChart(selector: string) {
         setIsLoading(false)
       }
     }
-    debounce(asyncFetch, 1000)();
+    debounce(asyncFetch, 250)();
   }, [endpoint, updateMessageFn, message])
 
   // Performing D3 DOM modification side effect
