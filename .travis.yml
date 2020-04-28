@@ -9,14 +9,14 @@ jobs:
   include:
     - stage: "Run Cypress e2e"
       script: npm run e2e
-    - stage: "Deploy to Github Pages"
+    - stage: "Build app"
       if: branch = master
-      script: echo 'Building app'
       script: npm run build
-    deploy:
-      provider: pages
-      skip_cleanup: true
-      github_token: $github_token
-      local_dir: build
-      on:
-        branch: master
+    - stage: "Deploy to Github Pages"
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $github_token
+        local_dir: build
+        on:
+          branch: master
