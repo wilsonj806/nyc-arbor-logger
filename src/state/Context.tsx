@@ -1,4 +1,4 @@
-import React, { createContext, FC, useState, useReducer } from 'react'
+import React, { createContext, FC, useReducer } from 'react'
 
 import { ContextVals } from '../types'
 
