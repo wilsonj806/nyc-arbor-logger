@@ -14,9 +14,9 @@ jobs:
       script: npm run build
     - stage: "Deploy to Github Pages"
       deploy:
-        script: skip
+        script: echo 'skipping tests and deploying to Github pages'
         provider: pages
-        skip_cleanup: true
+        cleanup: true
         github_token: $github_token
         local_dir: build
         on:
