@@ -1,16 +1,30 @@
-import React, { FC } from 'react'
+import React, { forwardRef } from 'react'
 import ReactDom from 'react-dom'
 
 import './modal.css'
 
 import { ModalProps } from '../types'
 
-const Modal: FC<ModalProps> = ({ shouldDisplay }) => {
+const Modal = forwardRef<any, ModalProps>(({ closeHandler, shouldDisplay }, ref) => {
   return shouldDisplay ? ReactDom.createPortal(
     (
-      <section className='modal'>
+      <section
+        role='dialog'
+        aria-modal='true'
+        className='modal'
+        tabIndex={ -1 }
+        ref={ ref }
+      >
         <header className='modal-header'>
           <h1>About This Project</h1>
+          <button
+            type='button'
+            className='btn--close'
+            onClick={closeHandler}
+            aria-label='Close'
+          >
+            &times;
+          </button>
         </header>
         <div className='modal-body'>
           <p>
@@ -26,6 +40,6 @@ const Modal: FC<ModalProps> = ({ shouldDisplay }) => {
     ),
     document.getElementById('portal') as Element
   ) : null
-}
+})
 
 export default Modal

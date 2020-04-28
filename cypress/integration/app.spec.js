@@ -104,13 +104,16 @@ describe('Tests for application navigation', () => {
     cy.get('[role=alert]')
   })
 
-  it('displays a modal on click of a button and closes it on click', () => {
+  it('displays an accessible modal on click of a button and closes it on click of a close button in the modal', () => {
     cy.contains('?')
       .click()
 
-    cy.contains('About This Project')
+    cy.focused()
+      .should('have.attr', 'role', 'dialog')
+      .should('have.attr', 'aria-modal', 'true')
+    // cy.contains('About This Project')
 
-    cy.contains('?')
+    cy.get('button[aria-label=Close]')
       .click()
   })
 })

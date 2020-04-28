@@ -15,8 +15,11 @@
 
 .modal-header {
   width: 100%;
-  background: rgb(184, 102, 26);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
   color: white;
+  background: rgb(184, 102, 26);
   box-shadow: 0px 2px 4px rgba(92, 92, 92, 0.25);
 }
 
@@ -26,4 +29,13 @@
 
 .modal-body {
   padding: 0 16px;
+}
+
+.btn--close {
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  background: transparent;
+  border: 0px solid transparent;
 }

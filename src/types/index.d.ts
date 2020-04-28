@@ -30,6 +30,8 @@ declare namespace ArborLoggerTypes {
 
   interface ModalProps {
     shouldDisplay: boolean
+    closeHandler: () => void
+    ref ?: React.MutableRefObject
   }
 
 }
