@@ -7,7 +7,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "deploy": "gh-pages -d build",
-    "test": "echo 'skipping tests'",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open",
     "cypress":"cypress run",
