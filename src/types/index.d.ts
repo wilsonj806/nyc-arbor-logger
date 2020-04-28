@@ -2,9 +2,14 @@
 
 
 declare namespace ArborLoggerTypes {
+  interface GlobalState {
+    endpoint: string
+    message: string
+  }
   interface ContextVals {
-    endpointPrefix: string
-    setEndpointPrefixWrap: (endpoint: string) => void
+    state: GlobalState
+    updateEndpointFn: (str: string) => void
+    updateMessageFn: (str: string) => void
   }
 
   interface navObj {
@@ -20,14 +25,15 @@ declare namespace ArborLoggerTypes {
   }
 
   interface ChartProps {
-    endpointPrefix: string
     chartSelector: string
   }
 
   interface ModalProps {
     shouldDisplay: boolean
+    closeHandler: () => void
+    ref ?: React.MutableRefObject
   }
-  
+
 }
 
 declare module 'ArborLoggerTypes' {

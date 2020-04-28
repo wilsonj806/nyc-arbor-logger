@@ -1,0 +1,70 @@
+{
+  "count": {
+    "data": {
+      "Bronx": 293,
+      "Brooklyn": 925,
+      "Manhattan": 509,
+      "Queens": 987,
+      "Staten Island": 286
+    }
+  },
+  "species": {
+    "data": {
+      "American hornbeam": 25,
+      "Callery pear": 190,
+      "Japanese zelkova": 109,
+      "Kentucky coffeetree": 7,
+      "London planetree": 269,
+      "Sophora": 179,
+      "ash": 60,
+      "black locust": 16,
+      "black walnut": 9,
+      "cedar": 22,
+      "cherry": 84,
+      "chestnut": 9,
+      "crab apple": 11,
+      "dead": 66,
+      "eastern cottonwood": 6,
+      "elm": 54,
+      "ginkgo": 122,
+      "golden raintree": 30,
+      "hardy rubber tree": 7,
+      "honeylocust": 349,
+      "lilac": 30,
+      "linden": 204,
+      "maple": 542,
+      "oak": 381,
+      "other": 51,
+      "purple-leaf plum": 15,
+      "stump": 67,
+      "sweetgum": 52,
+      "tulip-poplar": 15,
+      "willow": 19
+    }
+  },
+  "queens": {
+    "data": {
+      "American hornbeam": 6,
+      "Callery pear": 47,
+      "Japanese zelkova": 29,
+      "London planetree": 104,
+      "Sophora": 55,
+      "ash": 12,
+      "cedar": 14,
+      "cherry": 39,
+      "dead": 17,
+      "elm": 7,
+      "ginkgo": 25,
+      "golden raintree": 8,
+      "honeylocust": 72,
+      "lilac": 10,
+      "linden": 65,
+      "maple": 292,
+      "oak": 101,
+      "other": 46,
+      "purple-leaf plum": 6,
+      "stump": 21,
+      "sweetgum": 11
+    }
+  }
+}

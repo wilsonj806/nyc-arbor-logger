@@ -5,12 +5,13 @@ node_js:
 install:
   - npm ci
 cache: npm
-branches:
-  only:
-    - master
 jobs:
   include:
+    - stage: "Run Cypress e2e"
+      script: npm run e2e
     - stage: "Deploy to Github Pages"
+      if: branch = master
+      script: echo 'Building app'
       script: npm run build
 deploy:
   provider: pages

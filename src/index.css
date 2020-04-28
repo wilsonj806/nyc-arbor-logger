@@ -41,7 +41,8 @@ body {
   width: 100%;
   display: flex;
   margin: 30px 0;
-  place-items: center center;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {

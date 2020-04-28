@@ -16,14 +16,13 @@ const SecondaryArr = [
 ]
 
 const NavBar: FC<NavProps> = (props) => {
-  const { setEndpointPrefixWrap } = useContext(ApiContext)
+  const { updateEndpointFn } = useContext(ApiContext)
 
   const [primaryValue, setPrimaryValue] = useState('')
   const [shouldRenderSecondary, setRenderSecondary] = useState(false)
 
   const handleChange = (event: FormEvent) => {
     const target = event.target as any
-    console.dir(target)
     if (target.value === 'true') {
       setRenderSecondary(true)
     } else if (target.dataset.secondary !== 'true' && shouldRenderSecondary) {
@@ -37,7 +36,7 @@ const NavBar: FC<NavProps> = (props) => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault()
-    setEndpointPrefixWrap(primaryValue)
+    updateEndpointFn(primaryValue)
   }
 
   const MappedOptions = props.graph_options!.map((option, i: number) => {
@@ -64,7 +63,7 @@ const NavBar: FC<NavProps> = (props) => {
   return (
     <div className='ctr-nav'>
       <nav>
-        <form>
+        <form data-nav='navigation-form'>
           <label className='label--select'>
             Choose an option:
             <select className="select--primary" onChange={handleChange}>
