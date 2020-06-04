@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/nyc-arbor-logger/static/css/main.e4552159.chunk.css",
+    "main.js": "/nyc-arbor-logger/static/js/main.fe52cc67.chunk.js",
+    "main.js.map": "/nyc-arbor-logger/static/js/main.fe52cc67.chunk.js.map",
+    "runtime-main.js": "/nyc-arbor-logger/static/js/runtime-main.9cb4e58d.js",
+    "runtime-main.js.map": "/nyc-arbor-logger/static/js/runtime-main.9cb4e58d.js.map",
+    "static/js/2.1fa51eb0.chunk.js": "/nyc-arbor-logger/static/js/2.1fa51eb0.chunk.js",
+    "static/js/2.1fa51eb0.chunk.js.map": "/nyc-arbor-logger/static/js/2.1fa51eb0.chunk.js.map",
+    "index.html": "/nyc-arbor-logger/index.html",
+    "precache-manifest.5967dc927c62fddd786cd0600872fc38.js": "/nyc-arbor-logger/precache-manifest.5967dc927c62fddd786cd0600872fc38.js",
+    "service-worker.js": "/nyc-arbor-logger/service-worker.js",
+    "static/css/main.e4552159.chunk.css.map": "/nyc-arbor-logger/static/css/main.e4552159.chunk.css.map",
+    "static/js/2.1fa51eb0.chunk.js.LICENSE.txt": "/nyc-arbor-logger/static/js/2.1fa51eb0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.9cb4e58d.js",
+    "static/js/2.1fa51eb0.chunk.js",
+    "static/css/main.e4552159.chunk.css",
+    "static/js/main.fe52cc67.chunk.js"
+  ]
+}
